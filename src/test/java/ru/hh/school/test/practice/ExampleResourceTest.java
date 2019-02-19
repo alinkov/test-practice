@@ -14,13 +14,12 @@ public class ExampleResourceTest extends NabTestBase {
 
   @Test
   public void hello() {
-    final String name = "test";
     Response response = target("/hello")
-        .queryParam("name", name)
+        .queryParam("name", "test")
         .request()
         .get();
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-    assertEquals(String.format("Hello, %s!", name), response.readEntity(String.class));
+    assertEquals("Hello, test!", response.readEntity(String.class));
   }
 
   @Test
