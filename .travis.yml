@@ -1,0 +1,17 @@
+dist: trusty
+language: java
+jdk:
+  - openjdk11
+script:
+  - git fetch --unshallow
+  - mvn -P jacoco,!sonar clean test sonar:sonar
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+addons:
+  sonarcloud:
+    organization: "alinkov-github"
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
